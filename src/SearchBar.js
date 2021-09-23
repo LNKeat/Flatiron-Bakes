@@ -1,6 +1,11 @@
 function SearchBar (){
     return (
-        <h2>Search Bar</h2>
+        <div>
+            <form>
+                <input type="text" placeholder="Search" />
+                <input type="submit" />
+            </form>
+        </div>
     )
 }
 

@@ -1,11 +1,20 @@
+import { useState } from 'react'
+
 import CakeCard from "./cakeCard";
 import cakeData from "./data"
 
-function CakeContainer(){
+function CakeContainer({ setSelectedCake }){
+    const [cakeList, setCakeList] = useState(cakeData)
+
+    function handleRemove(e){
+        const cakeToRemove = (e.target.name)
+        const newCakeList = cakeList.filter (cake => cake.flavor !== cakeToRemove )
+        setCakeList(newCakeList)
+    }
     return (
         <>
-            {cakeData.map(cake => {
-                return <CakeCard key={cake.flavor} flavor={cake.flavor} price={cake.price} size={cake.size}/>
+            {cakeList.map(cake => {
+                return <CakeCard handleRemove={handleRemove} setSelectedCake={setSelectedCake} key={cake.flavor} cake={cake}/>
             })}
         </>
     );
