@@ -1,7 +1,7 @@
-function CakeDetail({ cake }){
+function CakeDetail({ cake, resetCakeDetail }){
   console.log(cake)
   return (
-    <div>
+    <div onClick={resetCakeDetail}>
       <img src={cake.image} style={{width: '200px'}} />
       <ul>
         <li>Flavor: {cake.flavor}</li>
@@ -9,6 +9,7 @@ function CakeDetail({ cake }){
         <li>Price: ${cake.price}</li>
         <li>Description: {cake.description}</li>
       </ul>
+      <button></button>
     </div>
   )
 }

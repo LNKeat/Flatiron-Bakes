@@ -1,9 +1,10 @@
 function SearchBar (){
     return (
         <div>
+            <hr />
             <form>
                 <input type="text" placeholder="Search" />
-                <input type="submit" />
+                <input type="submit" value="Search" />
             </form>
         </div>
     )
