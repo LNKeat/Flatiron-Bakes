@@ -13,20 +13,20 @@ function App() {
   const [selectedCake, setSelectedCake] = useState(null);
   // const [selectedFlavor, ]
   const [cakeList, setCakeList] = useState([])
+  const [fullCakeList, setFullCakeList] = useState([])
   const [flavorList, setFlavorList] = useState([])
-  const [fullFlavorList, setFullFlavorList] = useState([])
 
   useEffect(() => {
     fetch('http://localhost:4000/cakes')
     .then(res => res.json())
-    .then(cakesData => setCakeList(cakesData))
+    .then(cakesData => {
+      setCakeList(cakesData)
+      setFullCakeList(cakesData)
+    })
 
     fetch('http://localhost:4000/flavor')
     .then(res => res.json())
-    .then(flavorData => {
-      setFlavorList(flavorData)
-      setFullFlavorList(flavorData)
-    } )
+    .then(flavorData => setFlavorList(flavorData))
   }, [])
 
   function handleRemove(e){
@@ -42,17 +42,16 @@ function App() {
   function handleAddCake(cakeToAdd){
     setCakeList([cakeToAdd, ...cakeList])
   }
-  let filteredCakes;
 
   function handleFlavorSelect(e){
-    filteredCakes = cakeList
-    const flavor = e.target.innerText
-
+    const flavorToFilter = e.target.innerText
+    const filteredCakes = fullCakeList.filter(cake => cake.flavor === flavorToFilter)
+    setCakeList(filteredCakes)
   }
 
   
-  const flavors = fullFlavorList.map(flavor => {
-      return <li key={flavor} name={flavor} onClick={handleFlavorSelect} >{flavor}</li>
+  const flavors = flavorList.map(flavor => {
+      return <li key={flavor} onClick={handleFlavorSelect} >{flavor}</li>
     });
   
 
